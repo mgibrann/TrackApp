@@ -12,6 +12,8 @@ import {
   CreateTrack,
 } from "./src/screens";
 
+import { Provider as AuthProvider } from "./src/context/AuthContext";
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -25,15 +27,27 @@ const MainApp = () => {
   );
 };
 
-export default function App() {
+function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignIn">
+      <Stack.Navigator initialRouteName="SignIn" headerMode={"none"}>
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="MainApp" component={MainApp} />
-        <Stack.Screen name="TrackDetail" component={TrackDetail} />
+        <Stack.Screen
+          name="TrackDetail"
+          component={TrackDetail}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+export default () => {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+};
