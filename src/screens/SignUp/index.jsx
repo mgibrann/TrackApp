@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
 import { Spacer } from "../../component";
+import { Context as AuthContext } from "../../context/AuthContext";
 
 const SignUp = ({ navigation }) => {
+  const { state, signup } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,10 +29,7 @@ const SignUp = ({ navigation }) => {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <Button
-          title="Sign Up"
-          onPress={() => navigation.navigate("MainApp")}
-        />
+        <Button title="Sign Up" onPress={() => signup({ email, password })} />
         <Spacer height={10} />
         <Button title="Sign In" onPress={() => navigation.navigate("SignIn")} />
         <Text>{email}</Text>

@@ -1,4 +1,5 @@
 import createDataContext from "./createDataContext";
+import trackerApi from "../api/tracker";
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -8,7 +9,15 @@ const authReducer = (state, action) => {
 };
 
 const signup = (dispatch) => {
-  return ({ email, password }) => {};
+  return async ({ email, password }) => {
+    try {
+      const response = await tr;
+      ackerApi.post("/signup", { email, password });
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };
 
 const signin = (dispatch) => {
